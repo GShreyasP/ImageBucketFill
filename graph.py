@@ -392,6 +392,18 @@ class ImageGraph:
         self.reset_visited()
         print("Starting DFS; initial state:")
         self.print_image()
+        hold_color = self.vertices[start_index].color
+        stack = Stack()
+        stack.push(start_index)
+        while not stack.is_empty():
+            current_index = stack.pop()
+            current_vertex = self.vertices[current_index]
+            if current_vertex.color == hold_color:
+                current_vertex.visit_and_set_color(color)
+            if not current_vertex.visited and current_vertex.color == color:
+                current_vertex.visited = True
+                for neighbor in current_vertex.edges:
+                    stack.push(self.vertices[neighbor])
 
         # raise NotImplementedError(
         #     "Remove this exception and implement the DFS algorithm here."
