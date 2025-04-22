@@ -299,7 +299,6 @@ class ImageGraph:
 
     # Create the adjacency matrix.
     # Return the matrix at the end
-    # TODO: Modify this method. You may delete this comment when you are done.
     def create_adjacency_matrix(self):
         """
         Creates and returns the adjacency matrix for the graph.
@@ -319,7 +318,6 @@ class ImageGraph:
                 matrix[vertex.index][adj_i] = 1
         return matrix
 
-    # TODO: Modify this method. You may delete this comment when you are done.
     def bfs(self, start_index, color):
         """
         You must implement this algorithm using a Queue.
@@ -346,8 +344,7 @@ class ImageGraph:
         print("Starting BFS; initial state:")
         self.print_image()
 
-        if self.vertices[start_index].color == color:
-            return True
+        hold_color = self.vertices[start_index].color
 
         q = Queue()
         q.enqueue(start_index)
@@ -355,7 +352,7 @@ class ImageGraph:
         while not q.is_empty():
             temp_index = q.dequeue()
             temp_vertex = self.vertices[temp_index]
-            if temp_vertex.color == self.vertices[start_index].color:
+            if temp_vertex.color == hold_color:
                 temp_vertex.visit_and_set_color(color)
             for neighbor in temp_vertex.edges:
                 if not self.vertices[neighbor].visited and self.vertices[neighbor].color == color:
