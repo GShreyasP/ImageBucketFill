@@ -71,7 +71,8 @@ class Node:
 
 
 class StackError(Exception):
-    pass
+    """Pass"""
+
 
 
 class Stack:
@@ -153,7 +154,8 @@ class Stack:
 
 
 class QueueError(Exception):
-    pass
+    '''pass'''
+
 
 
 class Queue:
@@ -365,7 +367,6 @@ class ImageGraph:
         #     "Remove this exception and implement the BFS algorithm here."
         # )
 
-    # TODO: Modify this method. You may delete this comment when you are done.
     def dfs(self, start_index, color):
         """
         You must implement this algorithm using a Stack WITHOUT using recursion.
@@ -456,7 +457,6 @@ def create_graph(data):
     # raise NotImplementedError("Remove this exception and implement create_graph here.")
 
 
-# TODO: Modify this function. You may delete this comment when you are done.
 def main():
     """
     The main function that drives the program execution.
