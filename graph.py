@@ -355,10 +355,11 @@ class ImageGraph:
             if temp_vertex.color == hold_color:
                 temp_vertex.visit_and_set_color(color)
             for neighbor in temp_vertex.edges:
-                if not self.vertices[neighbor].visited and self.vertices[neighbor].color == color:
+                neighbor_vert = self.vertices[neighbor]
+                if not neighbor_vert.visited and neighbor_vert.color == hold_color:
                     self.vertices[neighbor].visited = True
-                    q.enqueue( self.vertices[neighbor].visited)
-        # self.print_image()
+                    q.enqueue(neighbor)
+        self.print_image()
 
         # raise NotImplementedError(
         #     "Remove this exception and implement the BFS algorithm here."
@@ -398,13 +399,16 @@ class ImageGraph:
         while not stack.is_empty():
             current_index = stack.pop()
             current_vertex = self.vertices[current_index]
-            if current_vertex.color == hold_color:
-                current_vertex.visit_and_set_color(color)
-            if not current_vertex.visited and current_vertex.color == color:
+            if not current_vertex.visited:
+                if current_vertex.color == hold_color:
+                    current_vertex.visit_and_set_color(color)
                 current_vertex.visited = True
                 for neighbor in current_vertex.edges:
-                    stack.push(self.vertices[neighbor])
-
+                    neighbor_vertex = self.vertices[neighbor]
+                    if not neighbor_vertex.visited and neighbor_vertex.color == hold_color:
+                        # self.vertices[neighbor].visited = True
+                        stack.push(neighbor)
+        self.print_image()
         # raise NotImplementedError(
         #     "Remove this exception and implement the DFS algorithm here."
         # )
@@ -463,17 +467,20 @@ def main():
 
     # read all input as a single string.
     data = sys.stdin.read()
-    
     # create graph, passing in data
-    create_graph(data)
+    graph, start_index, color = create_graph(data)
     # print adjacency matrix in a readable format (maybe row by row)
-
+    adj_matrix = graph.create_adjacency_matrix()
+    length = len(adj_matrix)
+    for i in range(length):
+        print(adj_matrix[i])
+        # for j in range(len(adj_matrix[i])):
     # run bfs
-
+    graph.bfs(start_index, color)
     # reset by creating graph again
-
+    graph, start_index, color = create_graph(data)
     # run dfs
-
+    graph.dfs(start_index, color)
 
 if __name__ == "__main__":
     main()
